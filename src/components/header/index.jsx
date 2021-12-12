@@ -1,14 +1,28 @@
 import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
-import { useState } from "react";
-import { ReactComponent as ElevatusLogo } from "../../logo/elevatus-logo.svg";
+import { useEffect, useState } from "react";
+import { ReactComponent as ElevatusLogo } from "../../resources/elevatus-logo.svg";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState("العربية");
+
   const toggleLanguage = () => {
-    language === "English" ? setLanguage("العربية") : setLanguage("English");
+    if (language === "English") {
+      setLanguage("العربية");
+      i18n.changeLanguage("en");
+    } else {
+      setLanguage("English");
+      i18n.changeLanguage("ar");
+    }
   };
+
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
+
   return (
     <div>
       <AppBar position="static" color="black">
@@ -25,8 +39,8 @@ const Header = () => {
       </AppBar>
       <div className="search-cont">
         <div className="h-cont p-all-sm">
-          <OutlinedInput placeholder="Job Title" />
-          <Button variant="contained">Search</Button>
+          <OutlinedInput placeholder={t('job-title')} />
+          <Button variant="contained">{t("search")}</Button>
         </div>
       </div>
     </div>

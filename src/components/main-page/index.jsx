@@ -8,8 +8,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { useTranslation } from "react-i18next";
 
 const MainPage = () => {
+  const { t, i18n } = useTranslation();
   const [recentJobsList, setRecentJobsList] = useState([]);
   const listJobs = async (page, limit, itemQuery) => {
     const res = await getJobs(page, limit, itemQuery);
@@ -57,7 +59,7 @@ const MainPage = () => {
                   </List>
                 </CardContent>
                 <CardActions>
-                  <Button variant="outlined">View</Button>
+                  <Button variant="outlined">{t('view')}</Button>
                 </CardActions>
               </Card>
             </Grid>
