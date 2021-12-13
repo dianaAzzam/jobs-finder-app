@@ -9,7 +9,7 @@ export const getJobs = async (page, limit, itemQuery) => {
       language_profile_uuid: "ee5d991c-cdc6-4e83-b0b3-96f147208549",
       itemQuery: itemQuery || "",
       limit: limit || 1,
-      page: page || 1,
+      page: page,
     },
   };
   const res = await axios(options);

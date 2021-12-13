@@ -12,10 +12,19 @@ import JobsDetailsPage from "./components/Pages/JobDetailsPage";
 import { getJobs } from "./configs/api";
 function App() {
   const [jobsList, setJobsList] = useState({ page: 0, list: [] });
+  const [searchInput, setSearchInput] = useState("");
 
   const listJobs = async (page, limit, itemQuery) => {
     const res = await getJobs(page, limit, itemQuery);
     setJobsList({ page, list: res.jobs });
+  };
+
+  const getSearchResults = () => {
+    listJobs(null, 10, searchInput);
+  };
+
+  const changeSearchInput = (e) => {
+    setSearchInput(e.target.value);
   };
 
   useEffect(() => {
@@ -26,7 +35,10 @@ function App() {
     <Router>
       <Suspense fallback="loading">
         <ThemeProvider theme={theme}>
-          <Header />
+          <Header
+            changeSearchInput={changeSearchInput}
+            getSearchResults={getSearchResults}
+          />
           <Routes>
             <Route path="/" element={<HomePage jobsList={jobsList} />} />
             <Route
