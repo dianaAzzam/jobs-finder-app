@@ -26,20 +26,27 @@ const Header = () => {
   return (
     <div>
       <AppBar position="static" color="black">
-        <div className="h-cont">
+        <div className="h-cont" style={{ height: "10vh" }}>
           <div className="h-comp">
             <ElevatusLogo />
           </div>
-          <div className="h-comp">
+          <div
+            className="h-comp"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
             <p onClick={toggleLanguage} className="clickable-txt">
               {language}
             </p>
           </div>
         </div>
       </AppBar>
-      <div className="search-cont">
+      <div className="search-cont" style={{ height: "10vh" }}>
         <div className="h-cont p-all-sm">
-          <OutlinedInput placeholder={t('job-title')} />
+          <OutlinedInput
+            placeholder={t("job-title")}
+            size="small"
+            sx={{ fontSize: "smaller" }}
+          />
           <Button variant="contained">{t("search")}</Button>
         </div>
       </div>

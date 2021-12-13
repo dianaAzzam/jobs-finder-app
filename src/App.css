@@ -16,13 +16,42 @@
 .p-all-sm {
   padding: 1rem;
 }
-
 .container {
-  margin-right: 20%;
-  margin-left: 20%;
+  margin-right: 15vw;
+  margin-left: 15vw;
 }
 .body-p {
+  font-size: smaller;
+  font-weight: normal;
 }
 .title-p {
   font-weight: bold;
+  font-size: smaller;
+}
+
+.row-class-j {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row-class {
+  display: flex;
+  flex-direction: row;
+}
+.col-class {
+  display: flex;
+  flex-direction: column;
+}
+
+.border {
+  border: 0.0625rem solid #e9ecef;
+}
+
+.smallFont {
+  font-size: smaller;
+}
+.half-width {
+  width: 50%;
+  padding: 1rem;
 }

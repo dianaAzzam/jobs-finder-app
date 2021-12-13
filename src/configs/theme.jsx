@@ -8,6 +8,6 @@ export default createTheme({
     },
   },
   typography: {
-    fontFamily: "'Ubuntu', sans-serif",
+    fontFamily: "'Cairo', sans-serif",
   },
 });
