@@ -11,16 +11,21 @@ import HomePage from "./components/Pages/HomePage";
 import JobsDetailsPage from "./components/Pages/JobDetailsPage";
 import { getJobs } from "./configs/api";
 function App() {
-  const [jobsList, setJobsList] = useState({ page: 0, list: [] });
+  const [jobsList, setJobsList] = useState({ page: 0, list: [], total: 0 });
   const [searchInput, setSearchInput] = useState("");
 
   const listJobs = async (page, limit, itemQuery) => {
     const res = await getJobs(page, limit, itemQuery);
-    setJobsList({ page, list: res.jobs });
+    setJobsList({ page: page, list: res.jobs, total: res.total });
   };
 
   const getSearchResults = () => {
-    listJobs(null, 10, searchInput);
+    listJobs(null, 20, searchInput);
+  };
+
+  const changePage = (page) => {
+    debugger;
+    listJobs(page, 20, searchInput);
   };
 
   const changeSearchInput = (e) => {
@@ -28,7 +33,7 @@ function App() {
   };
 
   useEffect(() => {
-    listJobs(1, 10);
+    listJobs(0, 20);
   }, []);
 
   return (
@@ -40,7 +45,10 @@ function App() {
             getSearchResults={getSearchResults}
           />
           <Routes>
-            <Route path="/" element={<HomePage jobsList={jobsList} />} />
+            <Route
+              path="/"
+              element={<HomePage jobsList={jobsList} changePage={changePage} />}
+            />
             <Route
               path="jobs/:uri"
               element={<JobsDetailsPage jobsList={jobsList} />}
