@@ -13,10 +13,10 @@ const JobCard = ({ job, type }) => {
   return (
     <Card
       sx={{
-        width: "18vw",
         padding: type === "large" && "1rem 1rem",
         height: type === "small" ? "20vh" : "auto",
-        marginBottom: "1rem"
+        cursor: "pointer",
+        borderRadius: "1.2rem",
       }}
     >
       <div
@@ -26,8 +26,9 @@ const JobCard = ({ job, type }) => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {job.title}
-          <br />
+          <p className="body-p">
+            <strong>{job.title}</strong>
+          </p>
           {type === "small" && (
             <>
               {job.location.city
@@ -39,21 +40,24 @@ const JobCard = ({ job, type }) => {
         </div>
         {type === "large" && (
           <>
-            {job.location.city || "N/A"}
-            <br />
+            <p className="body-p">{job.location.city || "N/A"}</p>
             <Divider />
           </>
         )}
-        {job.career_level.length ? job.career_level.join(", ") : "N/A"}
-        <br />
+        <p className="body-p">
+          {job.career_level.length ? job.career_level.join(", ") : "N/A"}
+        </p>
         {type === "large" && (
           <>
             <Divider />
-            {job.skills.length ? job.skills.join(", ") : "N/A"}
-            <br />
+            <p className="body-p">
+              {job.skills.length ? job.skills.join(", ") : "N/A"}
+            </p>
             <Divider />
             <Link to={`/jobs/${job.uri}`}>
-              <Button variant="outlined">{t("view")}</Button>
+              <div className="flex-end">
+                <Button variant="outlined">{t("view")}</Button>
+              </div>
             </Link>
           </>
         )}

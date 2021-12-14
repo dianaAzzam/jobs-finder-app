@@ -5,7 +5,7 @@ import { ReactComponent as ElevatusLogo } from "../../resources/elevatus-logo.sv
 import OutlinedInput from "@mui/material/OutlinedInput";
 import { useTranslation } from "react-i18next";
 
-const Header = ({changeSearchInput, getSearchResults}) => {
+const Header = ({ changeSearchInput, getSearchResults }) => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState("العربية");
 
@@ -25,8 +25,11 @@ const Header = ({changeSearchInput, getSearchResults}) => {
 
   return (
     <div>
-      <AppBar position="static" color="black">
-        <div className="h-cont" style={{ height: "10vh" }}>
+      <AppBar
+        position="static"
+        color="black"
+      >
+        <div className="h-cont page-cont">
           <div className="h-comp">
             <ElevatusLogo />
           </div>
@@ -40,15 +43,17 @@ const Header = ({changeSearchInput, getSearchResults}) => {
           </div>
         </div>
       </AppBar>
-      <div className="search-cont" style={{ height: "10vh" }}>
-        <div className="h-cont p-all-sm">
+      <div className="page-cont">
+        <div className="h-cont search-cont p-all-sm">
           <OutlinedInput
             placeholder={t("job-title")}
             size="small"
-            sx={{ fontSize: "smaller" }}
+            sx={{ backgroundColor: "white" }}
             onChange={changeSearchInput}
           />
-          <Button variant="contained" onClick={getSearchResults}>{t("search")}</Button>
+          <Button variant="contained" onClick={getSearchResults}>
+            {t("search")}
+          </Button>
         </div>
       </div>
     </div>

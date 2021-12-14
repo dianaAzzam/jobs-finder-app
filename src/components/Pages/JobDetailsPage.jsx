@@ -36,7 +36,7 @@ const JobsDetailsPage = ({ jobsList }) => {
   return (
     <div
       style={{ display: "flex", flexDirection: "row" }}
-      className="container"
+      className="page-cont"
     >
       <div style={{ width: "30%", height: "80vh", overflowY: "scroll" }}>
         {jobsList?.list?.map((job) => (

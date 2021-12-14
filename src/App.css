@@ -1,7 +1,14 @@
 .h-cont {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
+}
+
+.search-cont {
+  border-bottom: 1px solid darkgrey;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #f1f1f1;
 }
 
 .h-comp {
@@ -16,14 +23,15 @@
 .p-all-sm {
   padding: 1rem;
 }
-.container {
-  margin-right: 15vw;
-  margin-left: 15vw;
-}
+
 .body-p {
   font-size: smaller;
   font-weight: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
 .title-p {
   font-weight: bold;
   font-size: smaller;
@@ -43,6 +51,11 @@
   display: flex;
   flex-direction: column;
 }
+.col-class-js {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .border {
   border: 0.0625rem solid #e9ecef;
@@ -54,4 +67,41 @@
 .half-width {
   width: 50%;
   padding: 1rem;
+}
+
+.cards-cont {
+  display: grid;
+  gap: 2vw;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.card {
+  min-height: 180px;
+  max-height: 180px;
+  cursor: pointer;
+}
+
+.heading {
+  margin-bottom: 1.5rem;
+  font-size: x-large;
+}
+
+.page-cont {
+  margin: 0vw 12vw;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0rem;
+}
+
+.css-29j57q-MuiPaper-root-MuiAppBar-root {
+  box-shadow: none;
 }
