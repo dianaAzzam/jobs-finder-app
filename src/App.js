@@ -1,30 +1,36 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Suspense } from "react";
-import Header from "./components/common/Header";
-import Footer from "./components/common/Footer";
-import { ThemeProvider } from "@mui/material/styles";
 import theme from "./configs/theme";
+import { getJobs } from "./configs/api";
+import Header from "./components/common/Header";
 import HomePage from "./components/Pages/HomePage";
 import JobsDetailsPage from "./components/Pages/JobDetailsPage";
-import { getJobs } from "./configs/api";
+import { ThemeProvider } from "@mui/material/styles";
+
 function App() {
-  const [jobsList, setJobsList] = useState({ page: 0, list: [], total: 0 });
+  const [jobsList, setJobsList] = useState({
+    page: 0,
+    list: [],
+    total: 0,
+  });
   const [searchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const listJobs = async (page, limit, itemQuery) => {
     const res = await getJobs(page, limit, itemQuery);
     setJobsList({ page: page, list: res.jobs, total: res.total });
+    setLoading(false);
   };
 
   const getSearchResults = () => {
+    setLoading(true);
     listJobs(null, 20, searchInput);
   };
 
   const changePage = (page) => {
-    debugger;
+    setLoading(true)
     listJobs(page, 20, searchInput);
   };
 
@@ -43,18 +49,24 @@ function App() {
           <Header
             changeSearchInput={changeSearchInput}
             getSearchResults={getSearchResults}
+            loading={loading}
           />
           <Routes>
             <Route
               path="/"
-              element={<HomePage jobsList={jobsList} changePage={changePage} />}
+              element={
+                <HomePage
+                  jobsList={jobsList}
+                  changePage={changePage}
+                  loading={loading}
+                />
+              }
             />
             <Route
               path="jobs/:uri"
-              element={<JobsDetailsPage jobsList={jobsList} />}
+              element={<JobsDetailsPage jobsList={jobsList} loading={loading}/>}
             />
           </Routes>
-          <Footer />
         </ThemeProvider>
       </Suspense>
     </Router>

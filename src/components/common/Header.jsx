@@ -1,11 +1,12 @@
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ReactComponent as ElevatusLogo } from "../../resources/elevatus-logo.svg";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { useTranslation } from "react-i18next";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
 
-const Header = ({ changeSearchInput, getSearchResults }) => {
+const Header = ({ changeSearchInput, getSearchResults, loading}) => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState("العربية");
 
@@ -25,13 +26,14 @@ const Header = ({ changeSearchInput, getSearchResults }) => {
 
   return (
     <div>
-      <AppBar
-        position="static"
-        color="black"
-      >
+      <AppBar position="static" color="black">
         <div className="h-cont page-cont">
-          <div className="h-comp">
-            <ElevatusLogo />
+          <div className="h-comp" style={{ alignItems: "center" }}>
+            <Link to={`/`}>
+              <div className="h-comp">
+                <ElevatusLogo />
+              </div>
+            </Link>
           </div>
           <div
             className="h-comp"
@@ -51,7 +53,7 @@ const Header = ({ changeSearchInput, getSearchResults }) => {
             sx={{ backgroundColor: "white" }}
             onChange={changeSearchInput}
           />
-          <Button variant="contained" onClick={getSearchResults}>
+          <Button variant="contained" onClick={getSearchResults} disabled={loading}>
             {t("search")}
           </Button>
         </div>

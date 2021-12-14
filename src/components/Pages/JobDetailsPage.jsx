@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
+import { Parser } from "html-to-react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import JobCard from "../common/JobCard";
+import { getJob } from "../../configs/api";
 import Divider from "@mui/material/Divider";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-
+import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import Button from "@mui/material/Button";
-import JobCard from "../common/JobCard";
-import { getJob } from "../../configs/api";
-import { Parser } from "html-to-react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const levels = [
   0,
@@ -23,8 +22,12 @@ const levels = [
   "Full professional proficiency",
   "Native or bilingual proficiency",
 ];
-const JobsDetailsPage = ({ jobsList }) => {
+const marginRight = { marginRight: "1rem" };
+const marginBottom = { marginBottom: "1rem" };
+
+const JobsDetailsPage = ({ jobsList, loading }) => {
   const { uri } = useParams();
+  const { t } = useTranslation();
   const [jobDetails, setJobDetails] = useState({});
   const getCurrentJob = async () => {
     const res = await getJob(uri);
@@ -34,143 +37,175 @@ const JobsDetailsPage = ({ jobsList }) => {
     getCurrentJob();
   }, []);
   return (
-    <div
-      style={{ display: "flex", flexDirection: "row" }}
-      className="page-cont"
-    >
-      <div style={{ width: "30%", height: "80vh", overflowY: "scroll" }}>
-        {jobsList?.list?.map((job) => (
-          <JobCard job={job} type={"small"} />
-        ))}
+    <div className="page-cont row-class">
+      <div className="left-nav">
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            {jobsList?.list?.map((job, idx) => (
+              <div style={{ marginBottom: "4vh" }} key={`${job.uuid}${idx}`}>
+                <JobCard job={job} type={"small"} />
+              </div>
+            ))}
+          </>
+        )}
       </div>
-      <div style={{ width: "70%", height: "80vh" }}>
-        <Paper elevation={1}>
+      <div className="right-nav">
+        <Card
+          sx={{
+            margin: "2rem 1rem",
+            borderRadius: "1rem",
+            padding: "1rem 1.2rem",
+          }}
+        >
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <Typography variant="h6" gutterBottom component="div">
-              {jobDetails.title}
-            </Typography>
-            <Chip label="Full Time" />
+            <div className="row-class-p">
+              <p className="h-text">
+                {jobDetails.title}
+                {jobDetails.job_type?.length &&
+                  jobDetails.job_type.map((jobType, idx) => (
+                    <span className="pill" key={`${jobType}${idx}`}>
+                      <Chip
+                        label={
+                          jobType.charAt(0).toUpperCase() + jobType.slice(1)
+                        }
+                      />
+                    </span>
+                  ))}
+              </p>
+            </div>
           </div>
-          <Typography variant="caption" display="block" gutterBottom>
-            Posted on: {jobDetails.posted_at}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Description
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {Parser().parse(jobDetails.description)}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Requirements
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {Parser().parse(jobDetails.requirements)}
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Summary
-          </Typography>
+          <p className="cap-text">Posted on: {jobDetails.posted_at}</p>
+          <p className="h-2-text">{t("decription")}</p>
+          <p className="body-p">{Parser().parse(jobDetails.description)}</p>
+          <p className="h-2-text">{t("requirements")}</p>
+          <p className="body-p">{Parser().parse(jobDetails.requirements)}</p>
+          <p className="h-2-text">{t("summary")}</p>
           <div
             className="row-class border smallFont"
             style={{ padding: "1rem" }}
           >
-            <div className="col-class half-width">
-              <div className="row-class-j">
-                <p>
-                  <strong>Salary range:</strong>
-                </p>
-                <p>
-                  {jobDetails.salary?.min} -{jobDetails.salary?.max}
-                </p>
-              </div>
-              <div className="row-class-j">
-                <p>
-                  <strong>Industry:</strong>
-                </p>
-                <p>{jobDetails.industry?.join(", ")}</p>
-              </div>
-              <>
-                {jobDetails.years_of_experience?.length ? (
-                  <div className="row-class-j">
-                    <p>
-                      <strong>Experience Required:</strong>
-                    </p>
-                    <p>{`${jobDetails.years_of_experience[0]} year(s)
-              minimum`}</p>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </>
+            <div className="summary-cont half-width">
+              <strong>{t("salaryRange")}</strong>
+
+              {jobDetails.salary?.min
+                ? `${jobDetails.salary?.min} -
+                  ${jobDetails.salary?.max}`
+                : "-"}
+
+              <strong>{t("industry")}</strong>
+
+              {jobDetails.industry?.length
+                ? `${jobDetails.industry?.join(", ")}`
+                : "-"}
+              <strong>{t("experience")}</strong>
+              {jobDetails.years_of_experience?.length
+                ? `${jobDetails.years_of_experience[0]} year(s)
+              minimum`
+                : "-"}
             </div>
             <Divider orientation="vertical" flexItem />
-            <div className="col-class half-width">
-              <div className="row-class-j">
-                <p>
-                  <strong>Major:</strong>
-                </p>
-                <p>{jobDetails.major?.join(", ")}</p>
-              </div>
-              <div className="row-class-j">
-                <p>
-                  <strong>Career Level:</strong>
-                </p>
-                <p>{jobDetails.career_level?.join(", ")}</p>
-              </div>
-              <div className="row-class-j">
-                <p>
-                  <strong>Minimum GPA:</strong>
-                </p>
-                <p>{jobDetails.gpa}</p>
-              </div>
+            <div className="summary-cont half-width">
+              <strong>{t("major")}</strong>
+
+              {jobDetails.major?.length
+                ? `${jobDetails.major?.join(", ")}`
+                : "-"}
+
+              <strong>{t("careerLevel")}</strong>
+
+              {jobDetails.career_level?.length
+                ? `${jobDetails.career_level?.join(", ")}`
+                : "-"}
+
+              <strong>{t("gpa")}</strong>
+              {jobDetails.gpa ? `${jobDetails.gpa}` : "-"}
             </div>
           </div>
           {jobDetails.skills?.length ? (
             <>
-              <Typography variant="subtitle1" gutterBottom component="div">
-                Required Skills
-              </Typography>
-              {jobDetails.skills?.map((skill) => {
-                return <Chip label={skill} />;
-              })}
-              <Divider />
+              <p className="h-2-text">{t("requestedSkills")}</p>
+              <div>
+                {jobDetails.skills?.map((skill, idx) => {
+                  return (
+                    <span className="chip" key={`${skill}${idx}`}>
+                      <Chip
+                        label={skill.charAt(0).toUpperCase() + skill.slice(1)}
+                        sx={marginBottom}
+                      />
+                    </span>
+                  );
+                })}
+              </div>
+              <Divider sx={{ marginTop: "1rem" }} />
             </>
           ) : (
             ""
           )}
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Languages
-          </Typography>
           {jobDetails.languages?.length ? (
             <>
-              {jobDetails.languages?.map((lang) => {
-                const langEnt = Object.entries(lang)[0];
-                return (
-                  <Chip
-                    label={`${langEnt[0].toUpperCase()} - ${
-                      levels[langEnt[1]]
-                    }`}
-                  />
-                );
-              })}
-              <Divider />
+              <p className="h-2-text">{t("languages")}</p>
+              <div>
+                {jobDetails.languages?.map((lang, idx) => {
+                  const langEnt = Object.entries(lang)[0];
+                  return (
+                    <span className="chip" key={`${lang}${idx}`}>
+                      <Chip
+                        label={`${langEnt[0].toUpperCase()} - ${
+                          levels[langEnt[1]]
+                        }`}
+                        sx={marginBottom}
+                      />
+                    </span>
+                  );
+                })}
+              </div>
+              <Divider sx={{ marginTop: "1rem" }} />
             </>
           ) : (
             ""
           )}
-          <Typography variant="subtitle1" gutterBottom component="div">
-            Share
-          </Typography>
-          <Fab color="primary" aria-label="add">
-            <FacebookIcon />
-          </Fab>
-          <Fab color="primary" aria-label="add">
-            <TwitterIcon />
-          </Fab>
-          <Fab color="primary" aria-label="add">
-            <LinkedInIcon />
-          </Fab>
-          <Button variant="contained">Apply</Button>
-        </Paper>
+          <div
+            className="row-class"
+            style={{ justifyContent: "space-between", margin: "1rem 0rem" }}
+          >
+            <div className="row-class">
+              <p className="h-2-text" style={marginRight}>
+                {t("share")}
+              </p>
+              <p>
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  sx={marginRight}
+                  size="small"
+                >
+                  <FacebookIcon />
+                </Fab>
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  sx={marginRight}
+                  size="small"
+                >
+                  <TwitterIcon />
+                </Fab>
+                <Fab
+                  color="primary"
+                  aria-label="add"
+                  sx={marginRight}
+                  size="small"
+                >
+                  <LinkedInIcon />
+                </Fab>
+              </p>
+            </div>
+            <p>
+              <Button variant="contained">{t("apply")}</Button>
+            </p>
+          </div>
+        </Card>
       </div>
     </div>
   );

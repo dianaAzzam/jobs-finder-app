@@ -1,22 +1,19 @@
 import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 
 const JobCard = ({ job, type }) => {
   const { t } = useTranslation();
+
   return (
     <Card
+      key={job.uuid}
       sx={{
-        padding: type === "large" && "1rem 1rem",
-        height: type === "small" ? "20vh" : "auto",
-        cursor: "pointer",
-        borderRadius: "1.2rem",
+        padding: "1rem 1rem",
+        height: type === "small" ? "5rem" : "auto",
+        borderRadius: "1rem",
       }}
     >
       <div
@@ -26,32 +23,32 @@ const JobCard = ({ job, type }) => {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <p className="body-p">
+          <p className={`body-p ${type === "small" && "zero-margin"}`}>
             <strong>{job.title}</strong>
           </p>
           {type === "small" && (
-            <>
+            <p className="tiny-font body-p" style={{ marginTop: "0px" }}>
               {job.location.city
                 ? `${job.location.city},${job.location.country}`
-                : "N/A"}
-            </>
+                : t('notApplicable')}
+            </p>
           )}
           <Divider />
         </div>
         {type === "large" && (
           <>
-            <p className="body-p">{job.location.city || "N/A"}</p>
+            <p className="body-p">{job.location.city || t('notApplicable')}</p>
             <Divider />
           </>
         )}
         <p className="body-p">
-          {job.career_level.length ? job.career_level.join(", ") : "N/A"}
+          {job.career_level.length ? job.career_level.join(", ") : t('notApplicable')}
         </p>
         {type === "large" && (
           <>
             <Divider />
             <p className="body-p">
-              {job.skills.length ? job.skills.join(", ") : "N/A"}
+              {job.skills.length ? job.skills.join(", ") : t('notApplicable')}
             </p>
             <Divider />
             <Link to={`/jobs/${job.uri}`}>

@@ -1,6 +1,20 @@
 {
   "search": "Search",
-  "job-title": "Job title",
+  "jobTitle": "Job title",
   "view": "View",
-  "recent-opening": "Recent Openings"
+  "recentOpening": "Recent Openings",
+  "notApplicable": "N/A",
+  "decription": "Description",
+  "requirements": "Requirements",
+  "summary": "Summary",
+  "salaryRange": "Salary Eange:",
+  "industry": "Industry:",
+  "experience": "Experience Required:",
+  "major": "Major:",
+  "careerLevel": "Career Level:",
+  "gpa": "Minimum GPA:",
+  "requestedSkills": "Required Skills",
+  "languages": "Languages",
+  "share": "Share",
+  "apply": "Apply"
 }

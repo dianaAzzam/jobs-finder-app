@@ -102,6 +102,86 @@
   margin: 2rem 0rem;
 }
 
-.css-29j57q-MuiPaper-root-MuiAppBar-root {
-  box-shadow: none;
+.tiny-font {
+  font-size: 0.7rem;
+}
+.zero-margin {
+  margin: 0px;
+}
+
+.left-nav {
+  width: 30%;
+  height: 80vh;
+  overflow-y: scroll;
+  padding: 2rem 1rem;
+  order: 1;
+}
+
+.right-nav {
+  width: 70%;
+  order: 2;
+}
+
+.h-text {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 0.2em;
+}
+.h-2-text {
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 0.3em;
+}
+.cap-text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  margin-bottom: 0.35em;
+}
+.chip {
+  margin: 0rem 0.5rem;
+}
+
+.pill {
+  font-weight: lighter;
+  margin-left: 1rem;
+}
+
+.row-class-p {
+  display: flex;
+  flex: wrap;
+  flex-direction: row;
+}
+
+.summary-cont {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+}
+
+@media only screen and (max-width: 768px) {
+  /* Mobile: */
+  .left-nav {
+    width: 100%;
+    height: auto;
+    padding: 2rem 1rem;
+    order: 2;
+  }
+  .right-nav {
+    width: 100%;
+    order: 1;
+  }
+  .row-class {
+    display: flex;
+    flex-direction: column;
+  }
+  .border .MuiDivider-root {
+    display: none;
+  }
+  .border .half-width {
+    width: 100%;
+  }
 }
