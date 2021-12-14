@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import JobCard from "../common/JobCard";
 import Pagination from "@mui/material/Pagination";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const HomePage = ({ jobsList, changePage, loading }) => {
   const { t } = useTranslation();
@@ -24,17 +24,24 @@ const HomePage = ({ jobsList, changePage, loading }) => {
   return (
     <div className="col-class-js page-cont">
       <h3 className="heading">{t("recentOpening")}</h3>
-      <div className="cards-cont">
-        {loading ? (
+      {loading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "50vh",
+          }}
+        >
           <CircularProgress />
-        ) : (
-          <>
-            {jobsList.list.map((job) => (
-              <JobCard job={job} type={"large"} />
-            ))}
-          </>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="cards-cont">
+          {jobsList.list.map((job) => (
+            <JobCard job={job} type={"large"} />
+          ))}
+        </div>
+      )}
       <div className="page-cont flex-center">
         <Pagination count={count} page={page} onChange={onPageChange} />
       </div>

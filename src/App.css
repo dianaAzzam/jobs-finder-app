@@ -159,9 +159,17 @@
 .summary-cont {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  grid-template-columns: repeat(2, minmax(90px, 1fr));
 }
 
+.card-actions-cont{
+  justify-content: space-between;
+  margin: 1rem 0rem;
+}
+
+.padding-1{
+  padding: 1rem;
+}
 @media only screen and (max-width: 768px) {
   /* Mobile: */
   .left-nav {
