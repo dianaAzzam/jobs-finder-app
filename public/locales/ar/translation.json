@@ -1,5 +1,20 @@
 {
   "search": "بحث",
-  "job-title": "عنوان الوظيفة",
-  "view": "عرض"
+  "jobTitle": "عنوان الوظيفة",
+  "view": "عرض",
+  "recentOpening": "الشواغر المتاحة",
+  "notApplicable": "غير متوفر",
+  "decription": "الوصف الوظيفي",
+  "requirements": "متطلبات الوظيفة",
+  "summary": "الملخص",
+  "salaryRange": "نطاق الراتب:",
+  "industry": "المجال:",
+  "experience": "الخبرة المطلوبة:",
+  "major": "التخصص:",
+  "careerLevel": "المستوى الوظيفي:",
+  "gpa": "المعدل التراكمي الأدنى:",
+  "requestedSkills": "المهارات المطلوبة",
+  "languages": "اللغات",
+  "share": "نشر",
+  "apply": "تقديم"
 }

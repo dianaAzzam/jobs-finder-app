@@ -1,7 +1,14 @@
 .h-cont {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
+}
+
+.search-cont {
+  border-bottom: 1px solid darkgrey;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #f1f1f1;
 }
 
 .h-comp {
@@ -17,12 +24,164 @@
   padding: 1rem;
 }
 
-.container {
-  margin-right: 20%;
-  margin-left: 20%;
-}
 .body-p {
+  font-size: smaller;
+  font-weight: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
 .title-p {
   font-weight: bold;
+  font-size: smaller;
+}
+
+.row-class-j {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.row-class {
+  display: flex;
+  flex-direction: row;
+}
+.col-class {
+  display: flex;
+  flex-direction: column;
+}
+.col-class-js {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.border {
+  border: 0.0625rem solid #e9ecef;
+}
+
+.smallFont {
+  font-size: smaller;
+}
+.half-width {
+  width: 50%;
+  padding: 1rem;
+}
+
+.cards-cont {
+  display: grid;
+  gap: 2vw;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.card {
+  min-height: 180px;
+  max-height: 180px;
+  cursor: pointer;
+}
+
+.heading {
+  margin-bottom: 1.5rem;
+  font-size: x-large;
+}
+
+.page-cont {
+  margin: 0vw 12vw;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0rem;
+}
+
+.tiny-font {
+  font-size: 0.7rem;
+}
+.zero-margin {
+  margin: 0px;
+}
+
+.left-nav {
+  width: 30%;
+  height: 80vh;
+  overflow-y: scroll;
+  padding: 2rem 1rem;
+  order: 1;
+}
+
+.right-nav {
+  width: 70%;
+  order: 2;
+}
+
+.h-text {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 0.2em;
+}
+.h-2-text {
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  margin-bottom: 0.3em;
+}
+.cap-text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  margin-bottom: 0.35em;
+}
+.chip {
+  margin: 0rem 0.5rem;
+}
+
+.pill {
+  font-weight: lighter;
+  margin-left: 1rem;
+}
+
+.row-class-p {
+  display: flex;
+  flex: wrap;
+  flex-direction: row;
+}
+
+.summary-cont {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+}
+
+@media only screen and (max-width: 768px) {
+  /* Mobile: */
+  .left-nav {
+    width: 100%;
+    height: auto;
+    padding: 2rem 1rem;
+    order: 2;
+  }
+  .right-nav {
+    width: 100%;
+    order: 1;
+  }
+  .row-class {
+    display: flex;
+    flex-direction: column;
+  }
+  .border .MuiDivider-root {
+    display: none;
+  }
+  .border .half-width {
+    width: 100%;
+  }
 }
