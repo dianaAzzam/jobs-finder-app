@@ -40,6 +40,7 @@ function App() {
 
   useEffect(() => {
     listJobs(0, 20);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
