@@ -51,7 +51,7 @@ const JobCard = ({ job, type }) => {
               {job.skills.length ? job.skills.join(", ") : t('notApplicable')}
             </p>
             <Divider />
-            <Link to={`/jobs/${job.uri}`}>
+            <Link to={`/jobs/${job.uri}`} style={{textDecoration:"none"}}>
               <div className="flex-end">
                 <Button variant="outlined">{t("view")}</Button>
               </div>

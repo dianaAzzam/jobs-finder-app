@@ -30,7 +30,7 @@ const Header = ({ changeSearchInput, getSearchResults, loading}) => {
       <AppBar position="static" color="black">
         <div className="h-cont page-cont">
           <div className="h-comp" style={{ alignItems: "center" }}>
-            <Link to={`/`}>
+            <Link to={`/`} style={{textDecoration:"none"}}>
               <div className="h-comp">
                 <ElevatusLogo />
               </div>
