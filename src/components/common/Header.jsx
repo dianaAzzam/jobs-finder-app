@@ -22,6 +22,7 @@ const Header = ({ changeSearchInput, getSearchResults, loading}) => {
 
   useEffect(() => {
     i18n.changeLanguage("en");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

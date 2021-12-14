@@ -35,6 +35,7 @@ const JobsDetailsPage = ({ jobsList, loading }) => {
   };
   useEffect(() => {
     getCurrentJob();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="page-cont row-class">
